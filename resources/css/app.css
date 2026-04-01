@@ -1,0 +1,55 @@
+/* resources/css/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0f0f0f; }
+    ::-webkit-scrollbar-thumb { background: #2f2f2f; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c0392b; }
+
+    ::selection { background: #c0392b; color: white; }
+}
+
+@layer components {
+    /* Admin table styles */
+    .admin-table {
+        @apply w-full text-sm;
+    }
+    .admin-table thead tr {
+        @apply border-b border-ar-border;
+    }
+    .admin-table thead th {
+        @apply text-left py-3 px-4 text-xs tracking-widest uppercase text-ar-text2 font-medium;
+    }
+    .admin-table tbody tr {
+        @apply border-b border-ar-border hover:bg-ar-gray/30 transition-colors;
+    }
+    .admin-table tbody td {
+        @apply py-3 px-4 text-ar-text;
+    }
+
+    /* Form inputs global */
+    .form-input {
+        @apply w-full bg-ar-gray border border-ar-border text-ar-white placeholder-ar-text2 px-4 py-3 text-sm
+               focus:border-ar-red focus:outline-none transition-colors duration-200;
+    }
+
+    /* Badges */
+    .badge-red    { @apply text-xs px-2 py-0.5 bg-red-900/40 text-red-400 border border-red-800/50; }
+    .badge-green  { @apply text-xs px-2 py-0.5 bg-green-900/40 text-green-400 border border-green-800/50; }
+    .badge-yellow { @apply text-xs px-2 py-0.5 bg-yellow-900/40 text-yellow-400 border border-yellow-800/50; }
+    .badge-gray   { @apply text-xs px-2 py-0.5 bg-ar-gray text-ar-text2 border border-ar-border; }
+}
+
+/* Spotify iframe dark theme override */
+iframe[src*="spotify"] {
+    border-radius: 0 !important;
+}
