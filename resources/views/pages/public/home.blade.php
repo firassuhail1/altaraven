@@ -549,8 +549,8 @@
         }
 
         /* ══════════════════════════════════════════════════
-                                                                               GALLERY GRID — CSS class-based (no inline style override)
-                                                                            ══════════════════════════════════════════════════ */
+                                                                                   GALLERY GRID — CSS class-based (no inline style override)
+                                                                                ══════════════════════════════════════════════════ */
         #gallery-grid {
             max-width: 1440px;
             margin: 0 auto;
@@ -740,8 +740,8 @@
         }
 
         /* ══════════════════════════════════════════════════
-                                                                               RESPONSIVE
-                                                                            ══════════════════════════════════════════════════ */
+                                                                                   RESPONSIVE
+                                                                                ══════════════════════════════════════════════════ */
 
         /* Tablet: 641px – 900px */
         @media (max-width: 900px) {
@@ -781,7 +781,7 @@
         /* Mobile: ≤ 640px */
         @media (max-width: 640px) {
             #gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 2fr;
                 padding: 0 16px;
             }
 

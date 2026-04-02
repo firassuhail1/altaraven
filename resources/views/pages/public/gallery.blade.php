@@ -18,7 +18,7 @@
 
         @forelse($items as $item)
             @if ($loop->first)
-                <div style="columns:3 280px; gap:6px; column-fill:balance;">
+                <div style="columns:2 160px; gap:4px; column-fill:balance;">
             @endif
 
             <div style="break-inside:avoid; margin-bottom:6px; position:relative; overflow:hidden; background:#0f0f0f; cursor:pointer;"

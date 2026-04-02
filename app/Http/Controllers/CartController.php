@@ -33,10 +33,34 @@ class CartController extends Controller
         return back()->with('success', 'Item ditambahkan ke keranjang!');
     }
 
+    // public function update(Request $request, string $key)
+    // {
+    //     $request->validate(['quantity' => 'required|integer|min:0|max:99']);
+    //     $this->cart->update($key, $request->quantity);
+    //     return back()->with('success', 'Keranjang diperbarui.');
+    // }
+
     public function update(Request $request, string $key)
     {
         $request->validate(['quantity' => 'required|integer|min:0|max:99']);
         $this->cart->update($key, $request->quantity);
+
+        if ($request->expectsJson()) {
+            $items = $this->cart->get();
+            $total = $this->cart->total();
+
+            // Hitung subtotal item ini
+            $subtotal = isset($items[$key])
+                ? $items[$key]['price'] * $items[$key]['quantity']
+                : 0;
+
+            return response()->json([
+                'success' => true,
+                'total' => number_format($total, 0, ',', '.'),
+                'subtotal' => number_format($subtotal, 0, ',', '.'),
+            ]);
+        }
+
         return back()->with('success', 'Keranjang diperbarui.');
     }
 

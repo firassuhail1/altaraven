@@ -59,25 +59,28 @@
                 </div>
 
                 @if ($product->description)
-                    <p class="text-ar-text2 leading-relaxed mb-8">{{ $product->description }}</p>
+                    {{-- <p class="text-ar-text2 leading-relaxed mb-8">{{ $product->description }}</p> --}}
+                    <p class="text-ar-text2 leading-relaxed mb-8">{!! nl2br(e($product->description)) !!}</p>
                 @endif
 
                 {{-- Variant selector --}}
                 @php
                     $activeVariants = $product->variants->where('is_active', true);
 
-                    $variantsJson = $activeVariants->map(function ($v) {
-                        return [
-                            'id'          => $v->id,
-                            'size'        => $v->size,
-                            'type'        => $v->type,
-                            'color'       => $v->color,
-                            'color_hex'   => $v->color_hex,
-                            'final_price' => (float) $v->final_price,
-                            'in_stock'    => $v->isInStock(),
-                            'label'       => $v->label,
-                        ];
-                    })->values();
+                    $variantsJson = $activeVariants
+                        ->map(function ($v) {
+                            return [
+                                'id' => $v->id,
+                                'size' => $v->size,
+                                'type' => $v->type,
+                                'color' => $v->color,
+                                'color_hex' => $v->color_hex,
+                                'final_price' => (float) $v->final_price,
+                                'in_stock' => $v->isInStock(),
+                                'label' => $v->label,
+                            ];
+                        })
+                        ->values();
 
                     $sizes = $activeVariants->pluck('size')->filter()->unique()->values();
                     $types = $activeVariants->pluck('type')->filter()->unique()->values();
@@ -92,8 +95,8 @@
                     selectedColor: null,
                     get matchedVariant() {
                         return this.variants.find(v =>
-                            (!this.selectedSize  || v.size  === this.selectedSize)  &&
-                            (!this.selectedType  || v.type  === this.selectedType)  &&
+                            (!this.selectedSize || v.size === this.selectedSize) &&
+                            (!this.selectedType || v.type === this.selectedType) &&
                             (!this.selectedColor || v.color === this.selectedColor)
                         ) ?? null;
                     },
@@ -173,7 +176,8 @@
                                 'bg-ar-red hover:bg-ar-red2 text-white cursor-pointer animate-pulse-red' :
                                 'bg-ar-gray text-ar-text2 cursor-not-allowed'"
                             class="w-full py-4 font-semibold text-sm tracking-widest uppercase transition-all duration-200 mb-3">
-                            <span x-text="!matchedVariant ? 'Select Options' : (!isInStock ? 'Out of Stock' : 'Add to Cart')">
+                            <span
+                                x-text="!matchedVariant ? 'Select Options' : (!isInStock ? 'Out of Stock' : 'Add to Cart')">
                                 Add to Cart
                             </span>
                         </button>
